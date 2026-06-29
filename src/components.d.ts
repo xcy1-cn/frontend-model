@@ -15,6 +15,8 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     XButton: typeof import('./components/XButton/XButton.vue')['default']
     XDialog: typeof import('./components/XDialog/XDialog.vue')['default']
+    XForm: typeof import('./components/XForm/XForm.vue')['default']
+    XFormItem: typeof import('./components/XForm/XFormItem.vue')['default']
     XInput: typeof import('./components/XInput/XInput.vue')['default']
   }
 }

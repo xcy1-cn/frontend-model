@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { reactive } from 'vue'
 import { ref } from 'vue'
 
 const username = ref('')
@@ -16,6 +17,35 @@ function handleClear() {
 
 function handleDialogClose() {
     console.log('弹窗关闭了')
+}
+
+const formRef = ref()
+
+const loginForm = reactive({
+    username: '',
+    password: ''
+})
+
+const loginRules = {
+    username: {
+        required: true,
+        message: '请输入用户名'
+    },
+    password: {
+        required: true,
+        message: '请输入密码'
+    }
+}
+
+function submitForm() {
+    const valid = formRef.value.validate()
+
+    if (!valid) {
+        console.log('表单校验失败')
+        return
+    }
+
+    console.log('表单校验成功', loginForm)
 }
 </script>
 
@@ -66,6 +96,25 @@ function handleDialogClose() {
                     </XButton>
                 </template>
             </XDialog>
+        </section>
+
+
+        <section class="block">
+            <h3>Form 组件</h3>
+
+            <XForm ref="formRef" :model="loginForm" :rules="loginRules">
+                <XFormItem label="用户名" prop="username">
+                    <XInput v-model="loginForm.username" placeholder="请输入用户名" />
+                </XFormItem>
+
+                <XFormItem label="密码" prop="password">
+                    <XInput v-model="loginForm.password" placeholder="请输入密码" />
+                </XFormItem>
+
+                <XFormItem label="">
+                    <XButton type="primary" @click="submitForm">提交</XButton>
+                </XFormItem>
+            </XForm>
         </section>
     </div>
 </template>
