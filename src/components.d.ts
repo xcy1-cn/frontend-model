@@ -18,5 +18,6 @@ declare module 'vue' {
     XForm: typeof import('./components/XForm/XForm.vue')['default']
     XFormItem: typeof import('./components/XForm/XFormItem.vue')['default']
     XInput: typeof import('./components/XInput/XInput.vue')['default']
+    XMessage: typeof import('./components/XMessage/XMessage.vue')['default']
   }
 }

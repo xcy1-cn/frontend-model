@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { ref } from 'vue'
+import XMessage from './components/XMessage'
 
 const username = ref('')
 const password = ref('')
@@ -46,6 +47,22 @@ function submitForm() {
     }
 
     console.log('表单校验成功', loginForm)
+}
+
+function showSuccessMessage() {
+    XMessage.success('保存成功')
+}
+
+function showErrorMessage() {
+    XMessage.error('保存失败')
+}
+
+function showWarningMessage() {
+    XMessage.warning('请检查输入内容')
+}
+
+function showInfoMessage() {
+    XMessage.info('这是一条提示信息')
 }
 </script>
 
@@ -115,6 +132,28 @@ function submitForm() {
                     <XButton type="primary" @click="submitForm">提交</XButton>
                 </XFormItem>
             </XForm>
+        </section>
+
+        <section class="block">
+            <h3>Message 组件</h3>
+
+            <div class="row">
+                <XButton type="success" @click="showSuccessMessage">
+                    Success
+                </XButton>
+
+                <XButton type="danger" @click="showErrorMessage">
+                    Error
+                </XButton>
+
+                <XButton @click="showWarningMessage">
+                    Warning
+                </XButton>
+
+                <XButton @click="showInfoMessage">
+                    Info
+                </XButton>
+            </div>
         </section>
     </div>
 </template>

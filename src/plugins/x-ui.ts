@@ -3,6 +3,7 @@ import XButton from "@/components/XButton";
 import XInput from "@/components/XInput";
 import XDialog from "@/components/XDialog";
 import {XForm, XFormItem} from "@/components/XForm";
+import XMessage from "@/components/XMessage";
 
 const components = [XButton, XInput, XDialog, XForm, XFormItem];
 
@@ -11,5 +12,6 @@ export default {
     components.forEach((component) => {
       app.component(component.__name as string, component);
     });
+    app.config.globalProperties.$message = XMessage;
   },
 };
