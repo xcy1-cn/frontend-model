@@ -21,5 +21,7 @@ declare module 'vue' {
     XMessage: typeof import('./components/XMessage/XMessage.vue')['default']
     XPagination: typeof import('./components/XPagination/XPagination.vue')['default']
     XTable: typeof import('./components/XTable/XTable.vue')['default']
+    XTabPane: typeof import('./components/XTabs/XTabPane.vue')['default']
+    XTabs: typeof import('./components/XTabs/XTabs.vue')['default']
   }
 }

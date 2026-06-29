@@ -136,6 +136,12 @@ const pagedUserList = computed(() => {
 function loadData() {
     XMessage.info(`当前第 ${page.value} 页，每页 ${pageSize.value} 条`)
 }
+
+const activeTab = ref('user')
+
+function handleTabChange(name: string) {
+    XMessage.info(`切换到：${name}`)
+}
 </script>
 
 <template>
@@ -253,6 +259,43 @@ function loadData() {
         </section>
 
         <XPagination v-model:currentPage="page" v-model:pageSize="pageSize" :total="total" @change="loadData" />
+
+        <section class="block">
+            <h3>Tabs 组件</h3>
+
+            <XTabs v-model="activeTab" @change="handleTabChange">
+                <XTabPane label="用户管理" name="user">
+                    <p>这里是用户管理内容。</p>
+                    <XTable :data="pagedUserList" :columns="columns">
+                        <template #status="{ row }">
+                            <span :style="{ color: row.status === 'active' ? 'green' : 'red' }">
+                                {{ row.status === 'active' ? '启用' : '禁用' }}
+                            </span>
+                        </template>
+
+                        <template #action="{ row }">
+                            <div class="row">
+                                <XButton size="small" type="primary" @click="editUser(row)">
+                                    编辑
+                                </XButton>
+
+                                <XButton size="small" type="danger" @click="deleteUser(row)">
+                                    删除
+                                </XButton>
+                            </div>
+                        </template>
+                    </XTable>
+                </XTabPane>
+
+                <XTabPane label="角色管理" name="role">
+                    <p>这里是角色管理内容。</p>
+                </XTabPane>
+
+                <XTabPane label="系统设置" name="setting">
+                    <p>这里是系统设置内容。</p>
+                </XTabPane>
+            </XTabs>
+        </section>
     </div>
 </template>
 

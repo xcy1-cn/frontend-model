@@ -6,9 +6,20 @@ import {XForm, XFormItem} from "@/components/XForm";
 import XMessage from "@/components/XMessage";
 import XTable from "@/components/XTable/XTable.vue";
 import XPagination from "@/components/XPagination";
+import { XTabPane, XTabs } from "@/components/XTabs";
 
 
-const components = [XButton, XInput, XDialog, XForm, XFormItem, XTable, XPagination];
+const components = [
+  XButton,
+  XInput,
+  XDialog,
+  XForm,
+  XFormItem,
+  XTable,
+  XPagination,
+  XTabs,
+  XTabPane,
+];
 
 export default {
   install(app: App) {
