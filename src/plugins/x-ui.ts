@@ -4,8 +4,11 @@ import XInput from "@/components/XInput";
 import XDialog from "@/components/XDialog";
 import {XForm, XFormItem} from "@/components/XForm";
 import XMessage from "@/components/XMessage";
+import XTable from "@/components/XTable/XTable.vue";
+import XPagination from "@/components/XPagination";
 
-const components = [XButton, XInput, XDialog, XForm, XFormItem];
+
+const components = [XButton, XInput, XDialog, XForm, XFormItem, XTable, XPagination];
 
 export default {
   install(app: App) {

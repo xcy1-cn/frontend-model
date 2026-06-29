@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 import { ref } from 'vue'
 import XMessage from './components/XMessage'
+import { computed } from 'vue'
 
 const username = ref('')
 const password = ref('')
@@ -63,6 +64,77 @@ function showWarningMessage() {
 
 function showInfoMessage() {
     XMessage.info('这是一条提示信息')
+}
+
+const userList = [
+    {
+        id: 1,
+        name: '张三',
+        age: 24,
+        status: 'active'
+    },
+    {
+        id: 2,
+        name: '李四',
+        age: 28,
+        status: 'disabled'
+    }
+]
+
+const columns = [
+    {
+        prop: 'name',
+        label: '姓名'
+    },
+    {
+        prop: 'age',
+        label: '年龄'
+    },
+    {
+        prop: 'status',
+        label: '状态',
+        slot: 'status'
+    },
+    {
+        prop: 'action',
+        label: '操作',
+        width: '180px',
+        slot: 'action'
+    }
+]
+
+function editUser(row: any) {
+    XMessage.info(`编辑用户：${row.name}`)
+}
+
+function deleteUser(row: any) {
+    XMessage.warning(`删除用户：${row.name}`)
+}
+
+const page = ref(1)
+const pageSize = ref(5)
+
+const fullUserList = [
+    { id: 1, name: '张三', age: 24, status: 'active' },
+    { id: 2, name: '李四', age: 28, status: 'disabled' },
+    { id: 3, name: '王五', age: 31, status: 'active' },
+    { id: 4, name: '赵六', age: 22, status: 'active' },
+    { id: 5, name: '小明', age: 26, status: 'disabled' },
+    { id: 6, name: '小红', age: 25, status: 'active' },
+    { id: 7, name: '小刚', age: 29, status: 'disabled' }
+]
+
+const total = computed(() => fullUserList.length)
+
+const pagedUserList = computed(() => {
+    const start = (page.value - 1) * pageSize.value
+    const end = start + pageSize.value
+
+    return fullUserList.slice(start, end)
+})
+
+function loadData() {
+    XMessage.info(`当前第 ${page.value} 页，每页 ${pageSize.value} 条`)
 }
 </script>
 
@@ -155,6 +227,32 @@ function showInfoMessage() {
                 </XButton>
             </div>
         </section>
+
+        <section class="block">
+            <h3>Table 组件</h3>
+
+            <XTable :data="userList" :columns="columns">
+                <template #status="{ row }">
+                    <span :style="{ color: row.status === 'active' ? 'green' : 'red' }">
+                        {{ row.status === 'active' ? '启用' : '禁用' }}
+                    </span>
+                </template>
+
+                <template #action="{ row }">
+                    <div class="row">
+                        <XButton size="small" type="primary" @click="editUser(row)">
+                            编辑
+                        </XButton>
+
+                        <XButton size="small" type="danger" @click="deleteUser(row)">
+                            删除
+                        </XButton>
+                    </div>
+                </template>
+            </XTable>
+        </section>
+
+        <XPagination v-model:currentPage="page" v-model:pageSize="pageSize" :total="total" @change="loadData" />
     </div>
 </template>
 
