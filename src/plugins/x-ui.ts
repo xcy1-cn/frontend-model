@@ -1,8 +1,10 @@
 import type { App } from "vue";
 import XButton from "@/components/XButton";
-import XInput from "@/components/XInput/XInput.vue";
+import XInput from "@/components/XInput";
+import XDialog from "@/components/XDialog";
 
-const components = [XButton, XInput];
+
+const components = [XButton, XInput, XDialog];
 
 export default {
   install(app: App) {

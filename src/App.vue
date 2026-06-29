@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 const username = ref('')
 const password = ref('')
+const dialogVisible = ref(false)
 
 function handleClick() {
     console.log('username:', username.value)
@@ -11,6 +12,10 @@ function handleClick() {
 
 function handleClear() {
     console.log('清空了输入框')
+}
+
+function handleDialogClose() {
+    console.log('弹窗关闭了')
 }
 </script>
 
@@ -42,6 +47,25 @@ function handleClear() {
 
             <p>username：{{ username }}</p>
             <p>password：{{ password }}</p>
+        </section>
+
+        <section class="block">
+            <h3>Dialog 组件</h3>
+
+            <XButton type="primary" @click="dialogVisible = true">
+                打开弹窗
+            </XButton>
+
+            <XDialog v-model="dialogVisible" title="删除确认" width="420px" @close="handleDialogClose">
+                <p>确认要删除这条数据吗？这个操作不可恢复。</p>
+
+                <template #footer>
+                    <XButton @click="dialogVisible = false">取消</XButton>
+                    <XButton type="danger" @click="dialogVisible = false">
+                        确认删除
+                    </XButton>
+                </template>
+            </XDialog>
         </section>
     </div>
 </template>

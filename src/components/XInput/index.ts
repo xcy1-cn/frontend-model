@@ -1,3 +1,3 @@
-import './XInput.vue'
+import XInput from "./XInput.vue";
 
 export default XInput;

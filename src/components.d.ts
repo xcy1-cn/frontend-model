@@ -14,6 +14,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     XButton: typeof import('./components/XButton/XButton.vue')['default']
+    XDialog: typeof import('./components/XDialog/XDialog.vue')['default']
     XInput: typeof import('./components/XInput/XInput.vue')['default']
   }
 }
